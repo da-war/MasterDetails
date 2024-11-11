@@ -3,6 +3,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
 >
     <Page id="page">
         <customHeader>
@@ -21,7 +22,7 @@
             <SplitContainer
                 initialMaster="master"
                 initialDetail="orderDetail"
-                id="splitcontainer"
+                id="SplitCont"
             >
                 <detailPages>
                     <Page
@@ -65,7 +66,7 @@
                                 </Column>
                             </columns>
                             <items>
-                                <ColumnListItem id="columns-content">
+                                <ColumnListItem id="columns-content" type="Navigation" press="onPressOrderDetail">
                                     <cells>
                                         <Text id="item-1" text="{OrderID}" />
                                         <Text id="item-2" text="{ProductID}" />
@@ -77,13 +78,43 @@
                             </items>
                         </Table>
                     </Page>
+
+                    <Page id="productsDetail" title="Product">
+                        <VBox id="formBox">
+                            <f:SimpleForm
+                                editable="false"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                labelSpanS="12"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                id="simpleForm-1"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                emptySpanXL="4"
+                                emptySpanS="0"
+                                layout="ResponsiveGridLayout"
+                            >
+                                <f:content>
+                                    <Label id="pn-label" text="Product Name" />
+                                    <Text id="pn" text="{/ProductName}" />
+                                    <Label id="si-label" text="Supplier ID" />
+                                    <Text id="si" text="{/SupplierID}" />
+                                    <Label id="qpu-label" text="Quantity Per Unit" />
+                                    <Text id="qpu" text="{/QuantityPerUnit}" />
+                                    <Label id="up-label" text="Unit Price" />
+                                    <Text id="up" text="{/UnitPrice}" />
+                                    <Label id="uoo-label" text="Units On Order" />
+                                    <Text id="uoo" text="{/UnitsOnOrder}" />
+                                </f:content>
+                            </f:SimpleForm>
+                        </VBox>
+                    </Page>
                 </detailPages>
 
                 <masterPages>
-                    <Page
-                        id="master"
-                        title="Order Master"
-                    >
+                    <Page id="master" title="Order Master">
                         <List
                             id="OrderList"
                             items="{/Orders}"
