@@ -9,14 +9,76 @@
             <OverflowToolbar id="id">
                 <content>
                     <ToolbarSpacer id="spacer-1" />
-                    <Title id="web-title" text="Order Summary Master Details" />
+                    <Title
+                        id="web-title"
+                        text="Order Summary Master Details"
+                    />
                     <ToolbarSpacer id="spacer-2" />
                 </content>
             </OverflowToolbar>
         </customHeader>
         <content>
-            <SplitContainer id="splitcontainer-1">
-                <detailPages />
+            <SplitContainer
+                initialMaster="master"
+                initialDetail="orderDetail"
+                id="splitcontainer"
+            >
+                <detailPages>
+                    <Page
+                        id="orderDetail"
+                        title="Order Details"
+                    >
+                        <Table
+                            id="orderTable"
+                            items="{/Order_Details}"
+                        >
+                            <columns>
+                                <Column id="col-1">
+                                    <Text
+                                        id="t-1"
+                                        text="Order ID"
+                                    />
+                                </Column>
+                                <Column id="col-2">
+                                    <Text
+                                        id="t-2"
+                                        text="Product ID"
+                                    />
+                                </Column>
+                                <Column id="col-3">
+                                    <Text
+                                        id="t-3"
+                                        text="Unit Price"
+                                    />
+                                </Column>
+                                <Column id="col-4">
+                                    <Text
+                                        id="t-4"
+                                        text="Quantity"
+                                    />
+                                </Column>
+                                <Column id="col-5">
+                                    <Text
+                                        id="t-5"
+                                        text="Discount"
+                                    />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem id="columns-content">
+                                    <cells>
+                                        <Text id="item-1" text="{OrderID}" />
+                                        <Text id="item-2" text="{ProductID}" />
+                                        <Text id="item-3" text="{UnitPrice}" />
+                                        <Text id="item-4" text="{Quantity}" />
+                                        <Text id="item-5" text="{Discount}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </Page>
+                </detailPages>
+
                 <masterPages>
                     <Page
                         id="master"
@@ -25,9 +87,14 @@
                         <List
                             id="OrderList"
                             items="{/Orders}"
+                            itemPress="onListPress"
                         >
                             <items>
-                                <StandardListItem id="myorder" title="{OrderID}" />
+                                <StandardListItem
+                                    id="myorder"
+                                    title="{OrderID}"
+                                    type="Navigation"
+                                />
                             </items>
                         </List>
                     </Page>
