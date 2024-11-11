@@ -3,7 +3,7 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/ui/model/FilterType",
-    "sap/ui/model/JSONModel"
+    // "sap/ui/model/JSONModel"
 ],
     function (Controller, Filter, FilterOperator, FilterType, JSONModel) {
         "use strict";
@@ -19,10 +19,12 @@ sap.ui.define([
                 const productId = oEvent.getSource().getBindingContext().getProperty("ProductID");
                 const oModel = this.getOwnerComponent().getModel();
 
+                // Read from the OData model and set directly to the view
                 oModel.read("/Products(" + productId + ")", {
                     success: function (onData) {
-                        const jData = new JSONModel(onData);
-                        that.getView().byId("simpleForm-1").setModel(jData);
+                        // Set a new JSONModel with fetched data and assign it a name (e.g., "productDetail")
+                        const productDetailModel = new JSONModel(onData);
+                        that.getView().byId("simpleForm-1").setModel(productDetailModel, "productDetail");
                         that.getSplitContObj().to(that.createId("productsDetail"));
                     },
                     error: function (onError) {
