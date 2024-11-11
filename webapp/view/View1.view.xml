@@ -1,7 +1,38 @@
-<mvc:View controllerName="com.masterdetail.masterdetails.controller.View1"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
+<mvc:View
+    controllerName="com.masterdetail.masterdetails.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page id="page">
+        <customHeader>
+            <OverflowToolbar id="id">
+                <content>
+                    <ToolbarSpacer id="spacer-1" />
+                    <Title id="web-title" text="Order Summary Master Details" />
+                    <ToolbarSpacer id="spacer-2" />
+                </content>
+            </OverflowToolbar>
+        </customHeader>
+        <content>
+            <SplitContainer id="splitcontainer-1">
+                <detailPages />
+                <masterPages>
+                    <Page
+                        id="master"
+                        title="Order Master"
+                    >
+                        <List
+                            id="OrderList"
+                            items="{/Orders}"
+                        >
+                            <items>
+                                <StandardListItem id="myorder" title="{OrderID}" />
+                            </items>
+                        </List>
+                    </Page>
+                </masterPages>
+            </SplitContainer>
+        </content>
     </Page>
 </mvc:View>
